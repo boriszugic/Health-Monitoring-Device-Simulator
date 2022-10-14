@@ -38,11 +38,8 @@ int setSensorFunctionBitsHR(int sensorFunction, unsigned short* heartRate){
 		*(heartRate) |= (1 << 1);
         return 1;
     }
-    else
-    {
-        *(heartRate) |= 1;
-        return 0;
-    }
+    
+    return 0;
 
 }
 
@@ -224,12 +221,8 @@ int setSensorFunctionBitsBP(int sensorFunction, unsigned int* bloodPressure){
 		*(bloodPressure) |= (1 << 1);
         return 1;
     }
-    else
-    {
-        *(bloodPressure) |= 1;
-        return 0;
-    }
-    
+   
+    return 0; 
 }
 
 
