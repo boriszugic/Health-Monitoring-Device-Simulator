@@ -85,13 +85,24 @@ int presentHeartRate(unsigned short heartRate)
 	printf("Heart rate is %d bpm\n\n", readHeartRate(heartRate));
 
 	// display abnormality if applicable
+	// case 1: low blood pressure if bits 11 and 12 are both set to 1
 	if ((1 << 11 & heartRate) && (1 << 12 & heartRate))
 		printf("%s", LOW_HR);
 	
 	else
 	{
+		// case 2: high blood pressure if only bit 12 is set to 1
 		if ((1 << 12 & heartRate))
 			printf("%s", HIGH_HR);
+		else 
+		{
+			// case 3: abnormal blood pressure but bits 11 and 12 are 0
+			// ask user to test blood pressure again
+			if (!((1 << 11 & heartRate) || (1 << 12 & heartRate)) && (1 << 2 & heartRate))
+			{
+				printf("Blood pressure is abnormal, but no indication of whether it is high or low. Please test blood pressure again.\n");
+			}
+		}
 	}
 
 	return(needsReset);
